@@ -86,6 +86,26 @@ module.exports = function(grunt) {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'qunit']
       }
+    },
+    shell: {
+      options: {
+        failOnError: true
+      },
+      'build-hls': { command: 'cd node_modules/videojs-contrib-hls/ && npm install && grunt' }
+    },
+    concurrent: {
+      dev: {
+        tasks: ['connect:dev', 'open', 'watch'],
+        options: {
+          logConcurrentOutput: true
+        }
+      },
+      build: {
+        tasks: ['shell:build-hls'],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
     }
   });
 
@@ -102,13 +122,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
 
   // Default task.
-  grunt.registerTask('default',
-                     ['clean',
-                      'jshint',
-                      'qunit',
-                      'concat',
-                      'uglify']);
-
+  grunt.registerTask('default', ['clean', 'jshint', 'qunit', 'concat', 'uglify']);
   grunt.registerTask('dev', 'Launching Dev Environment', 'concurrent:dev');
   grunt.registerTask('build', 'Building Environment', 'concurrent:build');
 
