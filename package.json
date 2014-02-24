@@ -7,11 +7,11 @@
   "license": "Apache 2",
   "repository": {
       "type": "git",
-      "url": "git@github.com:brightcove/videojs-contrib-hls.git#feature/basic-playback"
+      "url": "git@github.com:brightcove/videojs-mbr.git"
   },
   "scripts": {
     "test": "grunt",
-    "postinstall": "echo 'todo-put in mxmlc here'"
+    "postinstall": "grunt build"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
@@ -21,12 +21,14 @@
     "grunt-contrib-watch": "~0.4.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-connect": "~0.6.0",
-    "grunt": "~0.4.1"
+    "grunt": "~0.4.1",
+    "grunt-open": "0.2.3",
+    "grunt-shell": "0.6.1",
+    "grunt-concurrent": "0.4.3",
+    "video.js": "git+https://github.com/videojs/video.js.git#v4.4.1"
   },
   "dependencies": {
-    "video.js": "git+https://github.com/dmlap/video-js.git#v4.3.0-10",
-    "videojs-contrib-media-sources": "git+https://github.com/dmlap/videojs-contrib-media-sources.git#hotfix/misc-fixes",
-    "videojs-contrib-hls": "git+ssh://git@github.com:brightcove/videojs-contrib-hls.git#feature/basic-playback",
-    "videojs-swf": "4.3.5"
+    "videojs-contrib-hls": "git+https://github.com/videojs/videojs-contrib-hls.git#v0.3.0",
+    "videojs-contrib-media-sources": "git+https://github.com/videojs/videojs-contrib-media-sources.git"
   }
 }

@@ -63,8 +63,14 @@ module.exports = function(grunt) {
       dev: {
         options: {
           port: 1234,
-          base: 'workbench'
+          keepalive: true
         }
+      }
+    },
+    open : {
+      dev : {
+        path: 'http://127.0.0.1:<%= connect.dev.options.port %>/index.html',
+        app: 'Google Chrome'
       }
     },
     watch: {
@@ -91,6 +97,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-shell');
 
   // Default task.
   grunt.registerTask('default',
@@ -99,5 +108,8 @@ module.exports = function(grunt) {
                       'qunit',
                       'concat',
                       'uglify']);
+
+  grunt.registerTask('dev', 'Launching Dev Environment', 'concurrent:dev');
+  grunt.registerTask('build', 'Building Environment', 'concurrent:build');
 
 };
