@@ -10,8 +10,7 @@
       "url": "git@github.com:brightcove/videojs-mbr.git"
   },
   "scripts": {
-    "test": "grunt",
-    "postinstall": "grunt build"
+    "test": "grunt"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.0",
@@ -24,11 +23,12 @@
     "grunt": "~0.4.1",
     "grunt-open": "0.2.3",
     "grunt-shell": "0.6.1",
-    "grunt-concurrent": "0.4.3",
-    "video.js": "git+https://github.com/videojs/video.js.git#v4.4.1"
+    "grunt-concurrent": "0.4.3"
   },
   "dependencies": {
-    "videojs-contrib-hls": "git+https://github.com/videojs/videojs-contrib-hls.git#v0.3.0",
-    "videojs-contrib-media-sources": "git+https://github.com/videojs/videojs-contrib-media-sources.git"
+	  "video.js": "git+https://github.com/videojs/video.js.git#v4.4.1",
+	  "videojs-swf": "git+https://github.com/videojs/video-js-swf.git#v4.4.0",
+	  "videojs-contrib-hls": "git+https://github.com/videojs/videojs-contrib-hls.git",
+	  "videojs-contrib-media-sources": "git+https://github.com/videojs/videojs-contrib-media-sources.git"
   }
 }

@@ -69,7 +69,7 @@ module.exports = function(grunt) {
     },
     open : {
       dev : {
-        path: 'http://127.0.0.1:<%= connect.dev.options.port %>/index.html',
+        path: 'http://127.0.0.1:<%= connect.dev.options.port %>/example.html',
         app: 'Google Chrome'
       }
     },

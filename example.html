@@ -1,43 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>video.js HLS Plugin Example</title>
+	<meta charset="utf-8">
+	<title>video.js MBR Plugin Example</title>
 
-  <link href="node_modules/video.js/dist/video-js/video-js.css" rel="stylesheet">
-  
-  <!-- video.js -->
-  <script src="node_modules/video.js/dist/video-js/video.js"></script>
+	<!-- video.js -->
+	<link href="node_modules/video.js/dist/video-js/video-js.css"
+	      rel="stylesheet">
 
-  <!-- Media Sources plugin -->
-  <script src="node_modules/videojs-contrib-media-sources/videojs-media-sources.js"></script>
+	<script src="node_modules/video.js/dist/video-js/video.js"></script>
 
-  <!-- HLS plugin -->
-  <script src="node_modules/videojs-contrib-hls/dist/videojs.hls.js"></script>
+	<!-- Media Sources plugin -->
+	<script	src="node_modules/videojs-contrib-hls/node_modules/videojs-contrib-media-sources/videojs-media-sources.js"></script>
 
-  <!-- MBR plugin -->
-  <script src="src/videojs-mbr.js"></script>
+	<!-- HLS plugin -->
+	<script src="node_modules/videojs-contrib-hls/src/videojs-hls.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/async-queue.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/flv-tag.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/exp-golomb.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/h264-stream.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/aac-stream.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/segment-parser.js"></script>
+	<script src="node_modules/videojs-contrib-hls/src/stream.js"></script>
+	<script	src="node_modules/videojs-contrib-hls/src/m3u8/m3u8-parser.js"></script>
+
+	<!-- MBR plugin -->
+	<script src="src/videojs-mbr.js"></script>
 
 </head>
 <body>
-  <video id="video"
-         class="video-js vjs-default-skin"
-         height="300"
-         width="600"
-         controls>
-    <source
-       src="http://solutions.brightcove.com/jwhisenant/hls/apple/bipbop/bipbopall.m3u8"
-       type="application/x-mpegURL">
-  </video>
-  <script>
-    videojs.options.flash.swf = 'node_modules/video.js/dist/video-js/video-js.swf';
-    // initialize the player
-    var player = videojs('video');
+<video id="video"
+       class="video-js vjs-default-skin"
+       height="300"
+       width="600"
+       controls>
+	<source
+			src="http://solutions.brightcove.com/jwhisenant/hls/apple/bipbop/bipbopall.m3u8"
+			type="application/x-mpegURL">
+</video>
+<script>
+	videojs.options.flash.swf = 'node_modules/video.js/dist/video-js/video-js.swf';
 
-    // initialize the plugin
-    player.hls();
-    player.mbr();
+	// initialize the player
+	var player = videojs('video');
 
-  </script>
+	// initialize the HLS plugin
+	player.hls();
+
+	// intialize the MBR plugin
+	player.mbr({autoSwitch:false});
+
+
+</script>
 </body>
 </html>
