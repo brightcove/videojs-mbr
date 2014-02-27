@@ -33,14 +33,12 @@
     },
 
     onManualModeSelectPlaylistOverride = function() {
-      console.log('selectPlaylist overridden due to manual mode');
       var playlists = player.hls.master.playlists.slice();
       return playlists[currentIndex];
     };
 
     player.mbr.autoSwitch = function (value) {
       if (value !== undefined) {
-        //console.log('setting autoswitch:', value);
 
         autoSwitch = value;
 
@@ -76,10 +74,8 @@
         console.log('setting current index:', index);
         if (currentIndex !== index) {
           currentIndex = index;
+          player.hls.validate(player.hls.selectPlaylist());
 
-          console.log('needs switch');
-          player.hls.media = player.hls.selectPlaylist();
-          player.currentTime(player.currentTime());
         }
       } else {
         return currentIndex;
