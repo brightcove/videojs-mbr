@@ -37,6 +37,10 @@
       return playlists[currentIndex];
     };
 
+    // Create the control bar menu item
+    player.controlBar.children.MbrButton = new videojs.MbrButton(player);
+    player.addChild(player.controlBar.children.MbrButton);
+
     player.mbr.autoSwitch = function (value) {
       if (value !== undefined) {
 
@@ -105,6 +109,10 @@
       }
     });
 
+    player.on('ready', function () {
+      console.log('Player ready');
+      console.log('is MBR?');
+    });
   };
 
   videojs.plugin('mbr', function () {
