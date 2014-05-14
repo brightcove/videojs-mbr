@@ -38,8 +38,8 @@
     };
 
     // Create the control bar menu item
-    player.controlBar.children.MbrButton = new videojs.MbrButton(player);
-    player.addChild(player.controlBar.children.MbrButton);
+    player.controlBar.mbrMenuButton = new videojs.MbrMenuButton(player);
+    player.controlBar.addChild(player.controlBar.mbrMenuButton);
 
     player.mbr.autoSwitch = function (value) {
       if (value !== undefined) {
@@ -85,34 +85,6 @@
         return currentIndex;
       }
     };
-
-    /*
-     Event Handlers
-     */
-
-    player.on('loadedmanifest', function () {
-      if (player.hls.media === undefined) {
-        if (player.hls.master.playlists &&
-            player.hls.master.playlists instanceof Array &&
-            player.hls.master.playlists.length > 1) {
-
-          console.log('MBR SOURCE DETECTED BY PLUGIN');
-
-          originalBandwidthFunction = player.hls.bandwidth;
-          originalSelectPlaylistFunction = player.hls.selectPlaylist;
-
-          player.mbr.autoSwitch(autoSwitch);
-          player.mbr.currentIndex(currentIndex);
-          player.mbr.bandwidthOverride(bandwidthOverride);
-
-        }
-      }
-    });
-
-    player.on('ready', function () {
-      console.log('Player ready');
-      console.log('is MBR?');
-    });
   };
 
   videojs.plugin('mbr', function () {
