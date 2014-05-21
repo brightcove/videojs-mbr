@@ -26,7 +26,7 @@
     "grunt-concurrent": "0.4.3"
   },
   "dependencies": {
-	  "video.js": "git+https://github.com/videojs/video.js.git#v4.5.2",
+	  "video.js": "git+https://github.com/videojs/video.js.git#v4.6.1",
 	  "videojs-swf": "git+https://github.com/videojs/video-js-swf.git",
 	  "videojs-hls": "git+https://github.com/videojs/videojs-contrib-hls.git",
 	  "videojs-contrib-media-sources": "git+https://github.com/videojs/videojs-contrib-media-sources.git"

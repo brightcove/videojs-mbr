@@ -11,9 +11,19 @@ videojs.MbrMenuButton = videojs.MenuButton.extend({
             console.log('loaded metadata');
             if (player.hls.playlists.master.playlists.length > 1) {
               console.log('MBR SOURCE DETECTED BY PLUGIN');
-              for (var i in player.hls.playlists.master.playlists) {
-                //console.log(i, player.hls.playlists.master.playlists[i]);
+              var menuOptions = [];
+              var index = 0;
+
+              while (index < player.hls.playlists.master.playlists.length) {
+                menuOptions.push(player.hls.playlists.master.playlists[index]);
+                index++;
               }
+
+              console.log('Menu Options', menuOptions);
+
+              console.log(this.items);
+
+              //this.createMenu();
             }
             console.log(player.hls.playlists.master.playlists.length);
           });
