@@ -14,6 +14,7 @@ videojs.MbrMenuButton = videojs.MenuButton.extend({
     this.updateVisibility();
 
     player.on('ready', videojs.bind(this, this.onPlayerReady));
+    //player.on('renditionsloaded', videojs.bind(this, this.createMenu));
   }
 });
 
@@ -25,8 +26,8 @@ videojs.MbrMenuButton.prototype.createEl = function(){
 
   // NOTE: There is a bug in Component.createEl that overrides the settings
   // listed in the call method above when used outside vjs core.
-  this.addClass('vjs-mbr-control');
-  this.removeClass('undefined');
+  //this.addClass('vjs-mbr-control');
+  //this.removeClass('undefined');
 
   return el;
 };
@@ -62,8 +63,9 @@ videojs.MbrMenuButton.prototype.onPlayerReady = function(){
   if (player.hls) {
     if (player.hls.playlists.state === 'HAVE_NOTHING') {
       player.hls.playlists.on('loadedmetadata', function() {
+        var menuOptions = [];
+
         if (player.hls.playlists.master.playlists.length > 1) {
-          var menuOptions = [];
           var index = 0;
 
           while (index < player.hls.playlists.master.playlists.length) {
@@ -71,15 +73,44 @@ videojs.MbrMenuButton.prototype.onPlayerReady = function(){
             index++;
           }
 
-          player.options()['renditions'] = menuOptions;
-
-          self.updateVisibility();
-
-          // Clear the HLS invalid src error in vjs
-          if(player.error().code === 4) player.error(null);
+        } else {
+          menuOptions.push(player.hls.playlists.master.playlists[0]);
         }
-        console.log(player.hls.playlists.master.playlists.length);
+
+        player.options()['renditions'] = menuOptions;
+
+        console.log(player.options()['renditions']);
+
+        player.trigger('renditionsloaded');
+
       });
     }
   }
 };
+
+// Menu creation
+videojs.MbrMenuButton.prototype.createMenu = function(){
+  var menu = new vjs.Menu(this.player());
+  var renditions = this.player().options()['renditions'];
+
+  if (renditions) {
+    for (var i = renditions.length - 1; i >= 0; i--) {
+      menu.addChild(new videojs.MbrMenuItem(this.player(), renditions[i]));
+    }
+  }
+
+  return menu;
+};
+
+videojs.MbrMenuItem = videojs.MenuItem.extend({
+  contentElType: 'button',
+  /** @constructor **/
+  init: function(player, options){
+    console.log('initiate a menu item for renditions');
+    console.log('-', options);
+    var index = this.bandwidth = parseFloat(options['bandwidth']);
+    var label = this.label = this.bandwidth/1000 + 'k';
+
+    player.on('renditionchange', videojs.bind(this, this.update));
+  }
+});

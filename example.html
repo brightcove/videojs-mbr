@@ -8,7 +8,7 @@
 	<link href="node_modules/video.js/dist/video-js/video-js.css"
 	      rel="stylesheet">
 
-	<script src="node_modules/video.js/dist/video-js/video.js"></script>
+	<script src="node_modules/video.js/dist/video-js/video.dev.js"></script>
 
 	<!-- Media Sources plugin -->
 	<script src="node_modules/videojs-contrib-media-sources/src/videojs-media-sources.js"></script>
@@ -48,12 +48,11 @@
 	videojs.options.flash.swf = 'node_modules/video.js/dist/video-js/video-js.swf';
 
 	// initialize the player
-	var player = videojs('video');
+	var player = videojs('video', {
+		techOrder: ['hls']
+	});
 
-	// initialize the HLS plugin
-	player.hls();
-
-	// intialize the MBR plugin
+	// initialize the MBR plugin
 	player.mbr({autoSwitch:false});
 
 	player.controlBar.show();
